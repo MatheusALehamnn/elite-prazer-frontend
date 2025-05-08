@@ -1,0 +1,27 @@
+# railway.toml for Next.js Frontend (elite-prazer-frontend)
+
+[build]
+  # Railway will use this Dockerfile to build the application.
+  # Ensure your Dockerfile is correctly configured for a Next.js production build.
+  builder = "dockerfile"
+  dockerfilePath = "Dockerfile"
+
+[deploy]
+  # The start command is typically defined within your Dockerfile's CMD instruction.
+  # If you need to override it or if Railway requires it explicitly:
+  # startCommand = "pnpm start"
+
+  # Optional: Configure a health check path for Railway to monitor your application.
+  healthcheckPath = "/"
+  healthcheckTimeout = 300 # seconds
+
+# Define environment variables for different environments if needed.
+# These can also be set directly in the Railway UI.
+[environments.production]
+  NODE_ENV = "production"
+  # Example: NEXT_PUBLIC_API_URL = "https://your-backend-api-url.up.railway.app"
+
+[environments.staging]
+  NODE_ENV = "production" # Staging often mirrors production
+  # Example: NEXT_PUBLIC_API_URL = "https://your-staging-backend-api-url.up.railway.app"
+
