@@ -1,21 +1,20 @@
-
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, MessageCircle, Star, MapPin, Shield, Crown } from "lucide-react";
 
 export function CompanionCard({ companion, onFavorite, onChat }) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleProfileClick = () => {
-    navigate(`/companion/${companion.id}`);
+    router.push(`/companion/${companion.id}`);
   };
 
   const handleViewProfile = (e) => {
     e.stopPropagation();
-    navigate(`/companion/${companion.id}`);
+    router.push(`/companion/${companion.id}`);
   };
 
   return (
