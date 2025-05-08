@@ -1,6 +1,4 @@
-
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,11 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export function AuthDialog({ isOpen, onClose }) {
   const { login, register } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [userType, setUserType] = React.useState("client");
 
@@ -28,9 +27,9 @@ export function AuthDialog({ isOpen, onClose }) {
       if (data.user) {
         // Redirect based on user type
         if (data.user.user_metadata?.role === "companion") {
-          navigate("/companion/setup");
+          router.push("/companion/setup");
         } else {
-          navigate("/profile");
+          router.push("/profile");
         }
       }
       onClose();
@@ -61,9 +60,9 @@ export function AuthDialog({ isOpen, onClose }) {
       if (data.user) {
         // Redirect based on user type
         if (userType === "companion") {
-          navigate("/companion/setup");
+          router.push("/companion/setup");
         } else {
-          navigate("/profile");
+          router.push("/profile");
         }
         onClose();
       }
