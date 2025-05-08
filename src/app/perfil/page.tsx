@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext"; // Assuming AuthContext is in this path
 import { User, Mail, MapPin, ShieldCheck, Edit3, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { toast } from "@/components/ui/use-toast"; // Assuming a toast component exists
+import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ProfilePage() {
   const { user, updateUserProfile, loading: authLoading, setLoading: setAuthLoading } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -224,4 +226,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { Upload, MapPin, DollarSign, Check, Calendar, Clock, Eye, Shield, UserCircle, Mail, Lock, Phone, Briefcase, Palette, MessageSquare, Info, AlertTriangle, Trash2, Edit3, PlusCircle, MinusCircle, ArrowLeft } from "lucide-react";
+import {
+  Upload, MapPin, DollarSign, Check, Calendar, Clock, Eye, Shield,
+  UserCircle, Mail, Lock, Phone, Briefcase, Palette, MessageSquare,
+  Info, AlertTriangle, Trash2, Edit3, PlusCircle, MinusCircle,
+  ArrowLeft, Camera, X
+} from "lucide-react";
 
 const STEPS = [
   { id: "profile", name: "Perfil Básico", icon: UserCircle },
