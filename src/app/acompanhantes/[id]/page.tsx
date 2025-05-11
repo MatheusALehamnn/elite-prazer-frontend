@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams, useRouter } from "next/navigation"; // Changed from react-router-dom
+import { useRouter } from "next/navigation"; // Changed from react-router-dom
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -12,7 +12,7 @@ import { Reviews } from "@/components/companion/Reviews"; // Assuming adapted
 import { Availability } from "@/components/companion/Availability"; // Assuming adapted
 import { PriceDisplay } from "@/components/companion/PriceDisplay"; // Assuming adapted
 import { useToast } from "@/components/ui/use-toast";
-import { Heart, MessageCircle, Star, MapPin, Clock, Shield, Crown, ArrowLeft } from "lucide-react";
+import { Heart, MessageCircle, Star, MapPin, Shield, Crown, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 // Define types for better code quality
