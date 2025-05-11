@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -153,7 +154,6 @@ export default function CompanionProfileSetupPage() {
     }));
   };
 
-
   const nextStep = () => {
     // Add validation logic here if needed for current step
     setCurrentStep(prev => Math.min(prev + 1, STEPS.length - 1));
@@ -263,14 +263,18 @@ export default function CompanionProfileSetupPage() {
   };
 
   if (authLoading) {
-    return <div className="flex justify-center items-center h-screen">Carregando...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">Carregando...</div>
+    );
   }
 
   if (!user) {
     // This should ideally be handled by a route guard or redirect in _app or middleware
     // For now, just show a message or redirect from here.
     // router.push('/login'); // Or show a login prompt
-    return <div className="flex justify-center items-center h-screen">Por favor, faça login para continuar.</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">Por favor, faça login para continuar.</div>
+    );
   }
 
   const renderStepContent = () => {
@@ -575,54 +579,51 @@ export default function CompanionProfileSetupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-rose-100 dark:to-rose-900/30 pt-20 pb-12">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="bg-card/80 backdrop-blur-lg border border-border/30 rounded-xl shadow-2xl p-6 md:p-10">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-center text-gradient mb-2">Complete seu Perfil de Acompanhante</h2>
-            <p className="text-center text-muted-foreground">Siga os passos para criar um perfil atraente e seguro.</p>
-          </div>
-
-          {/* Stepper */} 
-          <div className="mb-8 flex justify-between items-center">
-            {STEPS.map((step, index) => (
-              <React.Fragment key={step.id}>
-                <div className={`flex flex-col items-center ${currentStep >= index ? 'text-primary' : 'text-muted-foreground'}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep > index ? 'bg-primary text-primary-foreground border-primary' : currentStep === index ? 'border-primary' : 'border-border'}`}>
-                    {currentStep > index ? <Check className="h-5 w-5" /> : <step.icon className="h-5 w-5" />}
-                  </div>
-                  <p className={`mt-2 text-xs text-center ${currentStep >= index ? 'font-semibold' : ''}`}>{step.name}</p>
-                </div>
-                {index < STEPS.length - 1 && <div className={`flex-1 h-1 ${currentStep > index ? 'bg-primary' : 'bg-border'} mx-2`}></div>}
-              </React.Fragment>
-            ))}
-          </div>
-
-          <form onSubmit={(e) => e.preventDefault()}>
-            {renderStepContent()}
-            <div className="mt-8 flex justify-between">
-              <Button 
-                variant="outline"
-                onClick={prevStep} 
-                disabled={currentStep === 0 || isLoading}
-              >
-                Anterior
-              </Button>
-              {currentStep < STEPS.length - 1 ? (
-                <Button onClick={nextStep} disabled={isLoading} className="premium-gradient">
-                  Próximo
-                </Button>
-              ) : (
-                // This button is shown on the last step (Review)
-                // It's handled by the renderStepContent for the last case.
-                // Kept for structure, but the actual submit button is within the last step's content.
-                // Consider removing if the submit button is always part of the last step's content.
-              )}
+    (
+      <div className="min-h-screen bg-gradient-to-b from-background to-rose-100 dark:to-rose-900/30 pt-20 pb-12">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <div className="bg-card/80 backdrop-blur-lg border border-border/30 rounded-xl shadow-2xl p-6 md:p-10">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-center text-gradient mb-2">Complete seu Perfil de Acompanhante</h2>
+              <p className="text-center text-muted-foreground">Siga os passos para criar um perfil atraente e seguro.</p>
             </div>
-          </form>
+
+            {/* Stepper */} 
+            <div className="mb-8 flex justify-between items-center">
+              {STEPS.map((step, index) => (
+                <React.Fragment key={step.id}>
+                  <div className={`flex flex-col items-center ${currentStep >= index ? 'text-primary' : 'text-muted-foreground'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep > index ? 'bg-primary text-primary-foreground border-primary' : currentStep === index ? 'border-primary' : 'border-border'}`}>
+                      {currentStep > index ? <Check className="h-5 w-5" /> : <step.icon className="h-5 w-5" />}
+                    </div>
+                    <p className={`mt-2 text-xs text-center ${currentStep >= index ? 'font-semibold' : ''}`}>{step.name}</p>
+                  </div>
+                  {index < STEPS.length - 1 && <div className={`flex-1 h-1 ${currentStep > index ? 'bg-primary' : 'bg-border'} mx-2`}></div>}
+                </React.Fragment>
+              ))}
+            </div>
+
+            <form onSubmit={(e) => e.preventDefault()}>
+              {renderStepContent()}
+              <div className="mt-8 flex justify-between">
+                <Button 
+                  variant="outline"
+                  onClick={prevStep} 
+                  disabled={currentStep === 0 || isLoading}
+                >
+                  Anterior
+                </Button>
+                {currentStep < STEPS.length - 1 ? (
+                  <Button onClick={nextStep} disabled={isLoading} className="premium-gradient">
+                    Próximo
+                  </Button>
+                ) : null}
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 

@@ -14,6 +14,7 @@ import { useSearchParams, useRouter } from 'next/navigation'; // For query param
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuCheckboxItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,

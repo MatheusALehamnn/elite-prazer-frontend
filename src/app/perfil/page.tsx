@@ -222,7 +222,8 @@ export default function ProfilePage() {
             </div>
           </div>
 
-        </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 }

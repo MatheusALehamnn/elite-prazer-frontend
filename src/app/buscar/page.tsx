@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Search as SearchIcon, Filter, MapPin } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
 
 // You might want to define a type for your search results
 interface CompanionResult {
@@ -19,7 +18,6 @@ interface CompanionResult {
 }
 
 export default function SearchPage() {
-  const { user } = useAuth(); // Example of using auth context
   const [filters, setFilters] = useState({
     location: "",
     ageRange: [18, 50],

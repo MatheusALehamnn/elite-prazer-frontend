@@ -7,15 +7,26 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext"; // Assuming AuthContext is in this path
 import { Bell, Shield, EyeOff, CreditCard, LogOut, UserCog, Palette, AlertTriangle } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
+import Link from "next/link"; // Para o componente Link
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // Para os componentes de Select
+import { ShieldCheck } from "lucide-react"; // Ícone que faltava
+
 export default function SettingsPage() {
   const { user, logout, updateUserPreferences, loading, setLoading } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   // States for user preferences - initialize with user data or defaults
   const [emailNotifications, setEmailNotifications] = useState(false);
@@ -26,7 +37,7 @@ export default function SettingsPage() {
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteConfirmationText, setDeleteConfirmationText] = useState("");
-
+ 
   useEffect(() => {
     if (!loading && user && user.user_metadata) {
       setEmailNotifications(user.user_metadata.email_notifications ?? true);
