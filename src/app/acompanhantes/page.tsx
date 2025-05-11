@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -44,7 +44,7 @@ interface CityOption {
   label: string;
 }
 
-export default function CompanionListPage() {
+function CompanionListPageInner() {
   const [companions, setCompanions] = useState<Companion[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -352,6 +352,14 @@ export default function CompanionListPage() {
       </AnimatePresence>
       {/* TODO: Add pagination if many results */}
     </motion.div>
+  );
+}
+
+export default function CompanionListPageWrapper() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <CompanionListPageInner />
+    </Suspense>
   );
 }
 
