@@ -31,11 +31,13 @@ interface CompanionProfileData {
   // Add other fields as necessary
 }
 
-interface PageProps {
+export default function AcompanhantePage({ 
+  params,
+  searchParams 
+}: { 
   params: { id: string };
-}
-
-export default function CompanionProfilePage({ params }: PageProps) {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const { id } = params; // Get id from params
   const { user, toggleFavorite, setIsAuthOpen } = useAuth();
   // const { addToViewHistory } = useAuth(); // Assuming addToViewHistory is part of useAuth if needed
